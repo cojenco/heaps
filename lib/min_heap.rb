@@ -87,18 +87,23 @@ class MinHeap
   #  moves it down the heap if it's greater
   #  than it's parent node.
   def heap_down(index)
-    # base case: index at leaves level with no children or if current node is smaller than max_child
+    # calculate index of (possible) children
     child_L = index * 2 + 1
     child_R = index * 2 + 2
-    last_index = @store.length - 1
-    return if child_L > last_index && child_R > last_index
 
-    max_child = @store[child_L].key < @store[child_R].key ? child_L : child_R
-    return if @store[index].key < @store[max_child].key
+    # base case #1 - if current node has no children at all
+    return if child_L >= @store.length    
+    # base case #2 - if a child exists and current node is smaller than min_child
+    min_child = child_L
+    if child_R < @store.length
+      min_child = @store[child_L].key < @store[child_R].key ? child_L : child_R
+    end
+
+    return if @store[index].key < @store[min_child].key
 
     # recursive case: swap and run again
-    swap(index, max_child)
-    heap_down(max_child)
+    swap(index, min_child)
+    heap_down(min_child)
   end
 
   # If you want a swap method... you're welcome
