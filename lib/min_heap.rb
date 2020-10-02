@@ -15,7 +15,7 @@ class MinHeap
 
   # This method adds a HeapNode instance to the heap
   # Time Complexity: O(logn) where n is the total nodes of the heap, since at most we are just traversing one subtree
-  # Space Complexity: O(1) since no addtional space is required
+  # Space Complexity: O(logn) due to the system stack from recursion
   def add(key, value = key)
     # create a new node and add to the rear of the array (last leaf node)
     @store << HeapNode.new(key, value)
@@ -28,7 +28,7 @@ class MinHeap
   # This method removes and returns an element from the heap
   #   maintaining the heap structure
   # Time Complexity: O(logn) where n is the total nodes of the heap, since at most we are just traversing one subtree and maximum one swap per level
-  # Space Complexity: O(1) since no addtional space is required
+  # Space Complexity: O(logn) due to the system stack from recursion
   def remove()
     return nil if self.empty?
 
@@ -70,7 +70,7 @@ class MinHeap
   #  moves it up the heap, if it is less than it's parent node.
   #  It could be **very** helpful for the add method.
   # Time complexity: O(logn) since maximum one swap per level of the tree
-  # Space complexity: O(1)
+  # Space complexity: O(logn) due to the system stack from recursion
   def heap_up(index)
     parent_index = (index - 1) / 2
 
